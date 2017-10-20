@@ -14,7 +14,7 @@ services:
       - {{ .Stack.Name }}/logs/nginx-access.log:/var/log/nginx/access.log
       - {{ .Stack.Name }}/public:/app/
   php:
-    build: ./php7
+    build: https://github.com/F3LDS/php7.git
     links:
       - mysql
     volumes:
