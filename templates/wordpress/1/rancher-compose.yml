@@ -1,6 +1,6 @@
 version: '2'
 catalog:
-  name: "Wordpress"
+  name: "TyTo Wordpress"
   version: "v1.0"
   description: "Wordpress stack made for TyTo"
   questions:    
