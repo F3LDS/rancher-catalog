@@ -3,8 +3,6 @@ catalog:
   name: "Wordpress"
   version: "v1.0"
   description: "Wordpress stack made for TyTo"
-  uuid: Wordpress-1
-  minimum_rancher_version: v0.51.0
   questions:    
     - variable: project_name
       description: "Used to set a slew of other variables"
