@@ -25,7 +25,7 @@ services:
       certs: []
       port_rules:
       - protocol: http
-        service: wordpress
+        service: nginx
         source_port: ${public_port}
         target_port: 80
     health_check:
