@@ -4,11 +4,6 @@ catalog:
   version: "v1.0"
   description: "Wordpress stack made for TyTo"
   questions:    
-    - variable: project_name
-      description: "Used to set a slew of other variables"
-      label: "Project Name"
-      required: true
-      type: "string"
     - variable: public_port
       description: "public port to access the wordpress site"
       label: "Public Port"
