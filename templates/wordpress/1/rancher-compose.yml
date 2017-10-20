@@ -1,4 +1,4 @@
-version: '1'
+version: '2'
 catalog:
   name: "Wordpress"
   version: "v1.0"
