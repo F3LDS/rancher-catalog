@@ -1,0 +1,42 @@
+version: '2'
+services:
+  wordpress-lb:
+    image: rancher/lb-service-haproxy:v0.7.5
+    ports:
+      - ${public_port}:${public_port}
+  nginx:
+    image: tutum/nginx
+    links:
+      - php
+    volumes:
+      - ${project_name}/conf/nginx.conf:/etc/nginx/sites-enabled/default
+      - ${project_name}/logs/nginx-error.log:/var/log/nginx/error.log
+      - ${project_name}/logs/nginx-access.log:/var/log/nginx/access.log
+      - ${project_name}/public:/app/
+  php:
+    build: ./php7
+    links:
+      - mysql
+    volumes:
+      - ${project_name}/public:/app/
+  mysql:
+    image: mariadb
+    environment:
+      - MYSQL_ROOT_PASSWORD=${mysql_root_password}
+      - MYSQL_USER=${project_name}
+      - MYSQL_PASSWORD=${mysql_user_password}
+      - MYSQL_DATABASE=${project_name}
+    volumes:
+      - ${project_name}/db:/docker-entrypoint-initdb.d
+  phpmyadmin:
+    image: nazarpc/phpmyadmin
+    restart: always
+    links:
+      - mysql
+    environment:
+      - "MYSQL_HOST=mysql:3306"
+      - "PMA_ABSOLUTE_URI=pma.${DOMAIN}"
+#volumes:
+#  ${project_name}:
+#    driver: rancher-nfs
+volume_driver: rancher-nfs 
