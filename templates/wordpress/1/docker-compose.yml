@@ -8,11 +8,11 @@ services:
     image: tutum/nginx
     links:
       - php
-    #volumes:
+    volumes:
       #- {{ .Stack.Name }}/conf/nginx.conf:/etc/nginx/sites-enabled/default
       #- {{ .Stack.Name }}/logs/nginx-error.log:/var/log/nginx/error.log
       #- {{ .Stack.Name }}/logs/nginx-access.log:/var/log/nginx/access.log
-      #- {{ .Stack.Name }}/public:/app/
+      - {{ .Stack.Name }}/public:/app/
   php:
     build: https://github.com/F3LDS/php7.git
     links:
