@@ -5,11 +5,11 @@ services:
     ports:
       - ${public_port}:${public_port}
   nginx:
-    image: tutum/nginx
+    image: bitnami/nginx
     links:
       - php
     volumes:
-      - /opt/data/{{ .Stack.Name }}/conf/nginx/:/etc/nginx/conf.d/
+      - /opt/data/{{ .Stack.Name }}/conf/nginx/:/bitnami/nginx/conf/vhosts
       - /opt/data/{{ .Stack.Name }}/logs:/var/log/nginx/
       - /opt/data/{{ .Stack.Name }}/public:/app/
   php:
