@@ -9,7 +9,7 @@ services:
     links:
       - php
     volumes:
-      - /opt/data/{{ .Stack.Name }}/conf/nginx/:/etc/nginx/sites-enabled/
+      - /opt/data/{{ .Stack.Name }}/conf/nginx/:/etc/nginx/conf.d/
       - /opt/data/{{ .Stack.Name }}/logs:/var/log/nginx/
       - /opt/data/{{ .Stack.Name }}/public:/app/
   php:
