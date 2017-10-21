@@ -9,16 +9,16 @@ services:
     links:
       - php
     volumes:
-      #- {{ .Stack.Name }}/conf/nginx.conf:/etc/nginx/sites-enabled/default
-      #- {{ .Stack.Name }}/logs/nginx-error.log:/var/log/nginx/error.log
-      #- {{ .Stack.Name }}/logs/nginx-access.log:/var/log/nginx/access.log
-      - {{ .Stack.Name }}/public:/app/
+      - /opt/data/{{ .Stack.Name }}/conf/nginx.conf:/etc/nginx/sites-enabled/default
+      - /opt/data/{{ .Stack.Name }}/logs/nginx-error.log:/var/log/nginx/error.log
+      - /opt/data/{{ .Stack.Name }}/logs/nginx-access.log:/var/log/nginx/access.log
+      - /opt/data/{{ .Stack.Name }}/public:/app/
   php:
     build: https://github.com/F3LDS/php7.git
     links:
       - mysql
-    #volumes:
-      #- {{ .Stack.Name }}/public:/app/
+    volumes:
+      - /opt/data/{{ .Stack.Name }}/public:/app/
   mysql:
     image: mariadb
     environment:
@@ -26,8 +26,8 @@ services:
       - MYSQL_USER={{ .Stack.Name }}
       - MYSQL_PASSWORD=${mysql_user_password}
       - MYSQL_DATABASE={{ .Stack.Name }}
-    #volumes:
-      #- {{ .Stack.Name }}/db:/docker-entrypoint-initdb.d
+    volumes:
+      - /opt/data/{{ .Stack.Name }}/db:/docker-entrypoint-initdb.d
   phpmyadmin:
     image: nazarpc/phpmyadmin
     restart: always
@@ -36,8 +36,8 @@ services:
     environment:
       - "MYSQL_HOST=mysql:3306"
       - "PMA_ABSOLUTE_URI=pma.${DOMAIN}"
-volumes:
-  data:
-    driver: rancher-nfs
-  data/public:
-    driver: rancher-nfs
+#volumes:
+#  data:
+#    driver: rancher-nfs
+#  data/public:
+#    driver: rancher-nfs
